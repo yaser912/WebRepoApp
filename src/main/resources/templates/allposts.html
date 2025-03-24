@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaser's Blog - Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .post {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+    
+    <!-- This is where the posts will be displayed dynamically -->
+    <div id="posts-container">
+        <p>No posts yet. Create one <a href="/upload">here</a>.</p>
+    </div>
+
+    <script>
+        // Load posts from local storage (this will be replaced with backend data later)
+        document.addEventListener("DOMContentLoaded", function () {
+            const postsContainer = document.getElementById("posts-container");
+            const posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+            if (posts.length > 0) {
+                postsContainer.innerHTML = ""; // Clear default message
+                posts.forEach((post, index) => {
+                    const postDiv = document.createElement("div");
+                    postDiv.classList.add("post");
+                    postDiv.innerHTML = `<strong>Post #${index + 1}</strong><p>${post}</p>`;
+                    postsContainer.appendChild(postDiv);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

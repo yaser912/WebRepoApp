@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Post</title>
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f6d365, #fda085);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #444;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            resize: none;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: #fda085;
+            outline: none;
+            box-shadow: 0 0 8px rgba(253, 160, 133, 0.5);
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            background: #f0f0f0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.5s;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            color: white;
+            background: #007BFF;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        button:hover {
+            background: #0056b3;
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create a New Post</h2>
+    <form id="postForm">
+        <textarea id="postText" placeholder="Write your post here..." required></textarea>
+        <input type="file" id="postImage" accept="image/*">
+        <img id="imagePreview" alt="Image Preview">
+        <button type="submit">Post</button>
+    </form>
+</div>
+
+<script>
+    const imageInput = document.getElementById("postImage");
+    const imagePreview = document.getElementById("imagePreview");
+    const postForm = document.getElementById("postForm");
+
+    imageInput.addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = "block";
+                imagePreview.style.opacity = "0";
+                setTimeout(() => {
+                    imagePreview.style.opacity = "1";
+                }, 100);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    postForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Post submitted successfully!");
+        console.log("Post submitted with text and image.");
+        // You can add form submission logic here
+    });
+</script>
+
+</body>
+</html>
